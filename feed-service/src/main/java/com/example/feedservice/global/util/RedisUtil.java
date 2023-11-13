@@ -1,4 +1,4 @@
-package global.util;
+package com.example.feedservice.global.util;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;

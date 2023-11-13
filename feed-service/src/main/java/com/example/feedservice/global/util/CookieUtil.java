@@ -1,4 +1,4 @@
-package global.util;
+package com.example.feedservice.global.util;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class CookieUtil {
 
     // 리프레시 토큰 생성
-    public static void create(String value, HttpServletResponse response) {
+    public void create(String value, HttpServletResponse response) {
 
         ResponseCookie responseCookie = ResponseCookie.from("refreshToken", value)
                 .path("/")
@@ -24,7 +24,7 @@ public class CookieUtil {
     }
 
     // 쿠키 삭제
-    public static void delete(String value, HttpServletResponse response) {
+    public void delete(String value, HttpServletResponse response) {
 
         ResponseCookie responseCookie = ResponseCookie.from("refreshToken", value)
                 .path("/")

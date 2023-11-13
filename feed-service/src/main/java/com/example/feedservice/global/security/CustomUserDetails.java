@@ -1,6 +1,6 @@
-package global.security;
+package com.example.feedservice.global.security;
 
-import com.example.feedservice.user.User;
+import com.example.feedservice.domain.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

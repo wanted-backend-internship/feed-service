@@ -1,4 +1,4 @@
-package global.security;
+package com.example.feedservice.global.security;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

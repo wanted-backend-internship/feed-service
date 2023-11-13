@@ -1,4 +1,4 @@
-package global.exception;
+package com.example.feedservice.global.exception;
 
 public class ApiException extends RuntimeException {
     private final ErrorType errorType;

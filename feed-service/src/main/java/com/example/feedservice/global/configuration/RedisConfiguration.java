@@ -1,4 +1,4 @@
-package global.configuration;
+package com.example.feedservice.global.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

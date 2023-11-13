@@ -1,7 +1,7 @@
-package global.security;
+package com.example.feedservice.global.security;
 
-import global.jwt.JwtAuthenticationFilter;
-import global.util.TokenUtil;
+import com.example.feedservice.global.jwt.JwtAuthenticationFilter;
+import com.example.feedservice.global.util.TokenUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -23,11 +23,10 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfiguration {
-    private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
-    private CustomUserDetailsService customUserDetailsService;
-    private AuthenticationConfiguration authenticationConfiguration;
-    private TokenUtil tokenUtil;
-
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    private final CustomUserDetailsService customUserDetailsService;
+    private final AuthenticationConfiguration authenticationConfiguration;
+    private final TokenUtil tokenUtil;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -41,12 +40,10 @@ public class SecurityConfiguration {
                 .cors()
                 .and()
                 .authorizeRequests()
-                .requestMatchers("/ws/**").permitAll()
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers("/api/auth/**", "/oauth/**", "/login/**").permitAll()
+                .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/swagger-ui/**", "/v3/**", "/favicon.ico").permitAll()
                 .requestMatchers("/api/feed/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/planners/**").permitAll()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .anyRequest().authenticated()
                 .and().exceptionHandling().authenticationEntryPoint(customAuthenticationEntryPoint);

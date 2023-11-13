@@ -1,11 +1,11 @@
-package global.jwt;
+package com.example.feedservice.global.jwt;
 
-import global.exception.ApiException;
-import global.exception.ApiExceptionResponse;
-import global.exception.ErrorType;
-import global.util.CookieUtil;
-import global.util.RedisUtil;
-import global.util.TokenUtil;
+import com.example.feedservice.global.util.CookieUtil;
+import com.example.feedservice.global.util.RedisUtil;
+import com.example.feedservice.global.exception.ApiException;
+import com.example.feedservice.global.exception.ApiExceptionResponse;
+import com.example.feedservice.global.exception.ErrorType;
+import com.example.feedservice.global.util.TokenUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

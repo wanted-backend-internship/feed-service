@@ -1,4 +1,4 @@
-package global.exception;
+package com.example.feedservice.global.exception;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -28,8 +28,17 @@ public enum ErrorType {
     // 사용자를 찾을 수 없는 경우
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "USER-001", "유저가 존재하지 않습니다."),
 
-    // 이미 이메일이 존재하는 경우;
+    // 이미 이메일이 존재하는 경우
     ALREADY_EXIST_EMAIL(HttpStatus.BAD_REQUEST, "USER-002", "이미 존재하는 이메일 입니다."),
+
+    // 인증 번호 불일치
+    INVALID_AUTH_CODE(HttpStatus.BAD_REQUEST, "USER-003", "인증 코드가 일치하지 않습니다."),
+
+    // 인증 번호 불일치
+    INVALID_PASSWORD(HttpStatus.BAD_REQUEST, "USER-004", "비밀번호는 10자 이상, 숫자, 대문자, 특수 문자 중 2 가지를 포함해야 합니다."),
+
+    // null 값이 들어온 경우
+    NULL_VALUE_EXIST(HttpStatus.BAD_REQUEST, "CLIENT-001", "null 값은 허용할 수 없습니다."),
 
     // 내부 서버 오류
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "SERVER-001", "내부 서버 오류로 인해 요청을 처리할 수 없습니다.");

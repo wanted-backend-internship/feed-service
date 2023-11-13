@@ -1,6 +1,6 @@
-package global.security;
+package com.example.feedservice.global.security;
 
-import com.example.feedservice.auth.LoginRequest;
+import com.example.feedservice.domain.auth.LoginRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -1,7 +1,7 @@
-package global.security;
+package com.example.feedservice.global.security;
 
-import com.example.feedservice.user.User;
-import com.example.feedservice.user.UserRepository;
+import com.example.feedservice.domain.user.User;
+import com.example.feedservice.domain.user.UserRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

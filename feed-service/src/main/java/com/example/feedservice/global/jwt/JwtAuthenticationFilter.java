@@ -1,6 +1,6 @@
-package global.jwt;
+package com.example.feedservice.global.jwt;
 
-import global.util.TokenUtil;
+import com.example.feedservice.global.util.TokenUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

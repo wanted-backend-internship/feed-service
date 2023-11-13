@@ -1,9 +1,9 @@
-package global.util;
+package com.example.feedservice.global.util;
 
-import com.example.feedservice.user.User;
-import com.example.feedservice.user.UserRepository;
-import global.exception.ApiException;
-import global.exception.ErrorType;
+import com.example.feedservice.domain.user.User;
+import com.example.feedservice.domain.user.UserRepository;
+import com.example.feedservice.global.exception.ApiException;
+import com.example.feedservice.global.exception.ErrorType;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
