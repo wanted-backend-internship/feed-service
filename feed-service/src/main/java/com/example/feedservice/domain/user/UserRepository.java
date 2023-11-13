@@ -1,4 +1,4 @@
-package com.example.feedservice.user;
+package com.example.feedservice.domain.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
