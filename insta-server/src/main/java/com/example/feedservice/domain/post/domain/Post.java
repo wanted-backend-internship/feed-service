@@ -54,4 +54,16 @@ public class Post {
         title = postEditor.getTitle();
         description = postEditor.getDescription();
     }
+
+    public void increaseViewCount() {
+        this.viewCount += 1;
+    }
+
+    public void increaseHeartCount() {
+        this.heartCount += 1;
+    }
+
+    public void increaseShareCount() {
+        this.shareCount += 1;
+    }
 }

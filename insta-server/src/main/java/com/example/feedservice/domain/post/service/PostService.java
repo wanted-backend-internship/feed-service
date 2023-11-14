@@ -1,7 +1,8 @@
-package com.example.feedservice.domain.post;
+package com.example.feedservice.domain.post.service;
 
 import com.example.feedservice.domain.hashtag.HashTag;
 import com.example.feedservice.domain.hashtag.HashTagRepository;
+import com.example.feedservice.domain.post.PostRepository;
 import com.example.feedservice.domain.post.domain.Post;
 import com.example.feedservice.domain.post.domain.PostEditor;
 import com.example.feedservice.domain.post.dto.request.PostCreateRequest;
@@ -13,6 +14,7 @@ import com.example.feedservice.domain.user.User;
 import com.example.feedservice.global.exception.ApiException;
 import com.example.feedservice.global.exception.ErrorType;
 import com.example.feedservice.global.util.AuthUtil;
+import com.example.feedservice.global.util.PageUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,5 +119,25 @@ public class PostService {
         if (userId.equals(post.getUser().getId())) {
             postRepository.delete(post);
         }
+    }
+
+    public PostResponse getPostDetail(Long postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new ApiException(ErrorType.POST_NOT_FOUND));
+
+        post.increaseViewCount();
+        postRepository.save(post);
+
+        PostResponse postResponse = PostResponse.builder()
+                .id(post.getId())
+                .title(post.getTitle())
+                .description(post.getDescription())
+                .hashTags(post.getHashTags())
+                .heartCount(post.getHeartCount())
+                .shareCount(post.getShareCount())
+                .viewCount(post.getViewCount())
+                .build();
+
+        return postResponse;
     }
 }
