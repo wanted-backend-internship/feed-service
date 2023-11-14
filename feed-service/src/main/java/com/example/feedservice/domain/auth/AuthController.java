@@ -26,7 +26,7 @@ public class AuthController {
     @Operation (summary = "회원가입")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "회원가입 성공"),
-            @ApiResponse(responseCode = "404", description = "잘못된 값을 입력한 경우",
+            @ApiResponse(responseCode = "400", description = "잘못된 값을 입력한 경우",
                     content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class)))
     })
     @PostMapping(value = "/signup")
