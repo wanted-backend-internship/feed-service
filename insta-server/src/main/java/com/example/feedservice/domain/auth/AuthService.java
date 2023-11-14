@@ -38,26 +38,20 @@ public class AuthService {
             throw new ApiException(ErrorType.NULL_VALUE_EXIST);
         }
 
-        String authCode = redisUtil.getData("authCode:" +signupRequest.getEmail());
-        if (!authCode.equals(signupRequest.getAuthCode())) {
-            throw new ApiException(ErrorType.INVALID_AUTH_CODE);
+        // 비밀번호 검증
+        String passwordPattern = "^(?=(.*[0-9]){0,}(.*[A-Z]){0,}(.*[@#$%^&+=]){0,})((?=.*[A-Z])(?=.*[@#$%^&+=])|(?=.*[0-9])(?=.*[@#$%^&+=])|(?=.*[0-9])(?=.*[A-Z])).{10,}$";
+        if (signupRequest.getPassword().matches(passwordPattern)) {
+            // 회원가입 완료
+            User user = User.builder()
+                    .username(signupRequest.getUsername())
+                    .email(signupRequest.getEmail())
+                    .password(passwordEncoder.encode(signupRequest.getPassword()))
+                    .build();
+
+            userRepository.save(user);
 
         } else {
-            // 비밀번호 검증
-            String passwordPattern = "^(?=(.*[0-9]){0,}(.*[A-Z]){0,}(.*[@#$%^&+=]){0,})((?=.*[A-Z])(?=.*[@#$%^&+=])|(?=.*[0-9])(?=.*[@#$%^&+=])|(?=.*[0-9])(?=.*[A-Z])).{10,}$";
-            if (signupRequest.getPassword().matches(passwordPattern)) {
-                // 회원가입 완료
-                User user = User.builder()
-                        .username(signupRequest.getUsername())
-                        .email(signupRequest.getEmail())
-                        .password(passwordEncoder.encode(signupRequest.getPassword()))
-                        .build();
-
-                userRepository.save(user);
-
-            } else {
-                throw new ApiException(ErrorType.INVALID_PASSWORD);
-            }
+            throw new ApiException(ErrorType.INVALID_PASSWORD);
         }
     }
 

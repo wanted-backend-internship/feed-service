@@ -18,7 +18,4 @@ public class SignupRequest {
 
     @Schema(description = "비밀번호")
     private String password;
-
-    @Schema(description = "인증번호")
-    private String authCode;
 }
