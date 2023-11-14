@@ -48,7 +48,7 @@ public class PostService {
                     .build();
             postResponses.add(postResponse);
         }
-        return new PageUtil<PostResponse>(postResponses, pageable, posts.getTotalPages());
+        return new PageUtil<>(postResponses, pageable, posts.getTotalPages());
     }
 
     @Transactional
