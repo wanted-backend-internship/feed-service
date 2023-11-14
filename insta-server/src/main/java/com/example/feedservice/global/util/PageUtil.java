@@ -1,4 +1,4 @@
-package com.example.feedservice.domain.post;
+package com.example.feedservice.global.util;
 
 import java.util.List;
 import lombok.Getter;
