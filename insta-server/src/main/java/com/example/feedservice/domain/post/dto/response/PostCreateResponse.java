@@ -30,6 +30,6 @@ public class PostCreateResponse {
     @Schema (description = "게시글 공유 수", example = "100")
     private Long shareCount;
 
-    @Schema (description = "해시 태그", example = "#가방 #시은샵")
+    @Schema (description = "해시 태그")
     private List<HashTag> hashTags;
 }
