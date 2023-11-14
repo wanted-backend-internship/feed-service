@@ -41,6 +41,9 @@ public enum ErrorType {
     POST_NOT_FOUND(HttpStatus.NOT_FOUND, "POST-001", "존재하지 않는 게시글 입니다."),
 
     // null 값이 들어온 경우
+    HASH_TAG_NOT_FOUND(HttpStatus.NOT_FOUND, "POST-002", "해시태그가 존재하지 않습니다."),
+
+    // null 값이 들어온 경우
     NULL_VALUE_EXIST(HttpStatus.BAD_REQUEST, "CLIENT-001", "null 값은 허용할 수 없습니다."),
 
     // 내부 서버 오류
