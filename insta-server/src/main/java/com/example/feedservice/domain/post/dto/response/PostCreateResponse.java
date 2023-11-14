@@ -2,6 +2,7 @@ package com.example.feedservice.domain.post.dto.response;
 
 import com.example.feedservice.domain.hashtag.HashTag;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,4 +33,7 @@ public class PostCreateResponse {
 
     @Schema (description = "해시 태그")
     private List<HashTag> hashTags;
+
+    @Schema (description = "게시글 생성일")
+    private LocalDateTime createdAt;
 }

@@ -16,6 +16,7 @@ import com.example.feedservice.global.exception.ErrorType;
 import com.example.feedservice.global.util.AuthUtil;
 import com.example.feedservice.global.util.PageUtil;
 import jakarta.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,6 +46,7 @@ public class PostService {
                     .heartCount(post.getHeartCount())
                     .shareCount(post.getShareCount())
                     .viewCount(post.getViewCount())
+                    .createdAt(LocalDateTime.now())
                     .build();
             postResponses.add(postResponse);
         }
@@ -88,6 +90,7 @@ public class PostService {
                 .heartCount(createPost.getHeartCount())
                 .shareCount(createPost.getShareCount())
                 .viewCount(createPost.getViewCount())
+                .createdAt(LocalDateTime.now())
                 .build();
 
         return postCreateResponse;
