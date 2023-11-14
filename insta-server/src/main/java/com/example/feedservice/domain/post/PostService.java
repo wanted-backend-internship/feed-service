@@ -94,15 +94,18 @@ public class PostService {
     @Transactional
     public void updatePost (PostUpdateRequest postUpdateRequest, HttpServletRequest httpServletRequest) {
         Long userId = authUtil.getLoginUserIdFromToken(httpServletRequest);
-        Post post = postRepository.findByUserId(userId)
+        Post post = postRepository.findById(postUpdateRequest.getId())
                 .orElseThrow(() -> new ApiException(ErrorType.POST_NOT_FOUND));
 
-        PostEditor.PostEditorBuilder postEditorBuilder = post.toUpdate();
-        PostEditor postEditor = postEditorBuilder
-                .title(postUpdateRequest.getTitle())
-                .description(postUpdateRequest.getDescription())
-                .build();
-        post.update(postEditor);
+        if (userId.equals(post.getUser().getId())) {
+            PostEditor.PostEditorBuilder postEditorBuilder = post.toUpdate();
+            PostEditor postEditor = postEditorBuilder
+                    .title(postUpdateRequest.getTitle())
+                    .description(postUpdateRequest.getDescription())
+                    .build();
+
+            post.update(postEditor);
+        }
     }
 
     @Transactional
