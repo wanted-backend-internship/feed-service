@@ -2,6 +2,7 @@ package com.example.feedservice.domain.post;
 
 import com.example.feedservice.domain.post.dto.request.PostCreateRequest;
 import com.example.feedservice.domain.post.dto.request.PostDeleteRequest;
+import com.example.feedservice.domain.post.dto.request.PostUpdateRequest;
 import com.example.feedservice.domain.post.dto.response.PostCreateResponse;
 import com.example.feedservice.domain.post.dto.response.PostResponse;
 import com.example.feedservice.global.exception.ApiException;
@@ -77,9 +78,9 @@ public class PostController {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @PatchMapping(value = "")
-    public ResponseEntity<?> updatePost(@RequestBody PostCreateRequest request) {
+    public ResponseEntity<?> updatePost(@RequestBody PostUpdateRequest postUpdateRequest, HttpServletRequest httpServletRequest) {
         try {
-            postService.createPost(request);
+            postService.updatePost(postUpdateRequest, httpServletRequest);
             return ResponseEntity.ok().body("게시글 수정 성공!");
 
         } catch (ApiException apiException) {
