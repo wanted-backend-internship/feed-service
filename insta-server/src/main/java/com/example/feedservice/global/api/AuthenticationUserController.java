@@ -19,8 +19,8 @@ public class AuthenticationUserController {
 
     @PostMapping(value = "")
     public ResponseEntity<?> authorizeThirdPartyUser(
-            HttpServletRequest request, HttpServletResponse response, String scope) {
-        String accessToken = thirdPartyTokenUtil.createToken(scope);
+            HttpServletRequest request, HttpServletResponse response) {
+        String accessToken = thirdPartyTokenUtil.createToken();
         response.setHeader("Instagram", accessToken);
 
         // 인증 성공 후 저장된 리디렉트 URL로 리디렉트

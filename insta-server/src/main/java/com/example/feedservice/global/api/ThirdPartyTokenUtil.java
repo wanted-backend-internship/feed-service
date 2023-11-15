@@ -20,7 +20,7 @@ public class ThirdPartyTokenUtil {
     @Value("${secret.key}")
     private String SECRET_KEY;
 
-    public String createToken(String scope) {
+    public String createToken() {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
 
