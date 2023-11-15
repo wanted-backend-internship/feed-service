@@ -7,6 +7,8 @@ import com.example.feedservice.domain.post.service.CountService;
 import com.example.feedservice.global.exception.ApiException;
 import com.example.feedservice.global.exception.ApiExceptionResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -36,7 +38,9 @@ public class CountController {
                     content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class)))
     })
     @PostMapping(value = "/{postId}/hearts")
-    public ResponseEntity<?> increaseHeartResponse(@PathVariable Long postId) {
+    public ResponseEntity<?> increaseHeartResponse(
+            @Parameter(name = "id", description = "post 인덱스", in = ParameterIn.PATH)
+            @PathVariable Long postId) {
         try {
             IncreaseHeartResponse increaseHeartResponse = countService.increaseHeartResponse(postId);
             return ResponseEntity.ok().body(increaseHeartResponse);
@@ -57,7 +61,9 @@ public class CountController {
                     content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class)))
     })
     @PostMapping(value = "/{postId}/shares")
-    public ResponseEntity<?> increaseShareResponse(@PathVariable Long postId) {
+    public ResponseEntity<?> increaseShareResponse(
+            @Parameter(name = "id", description = "post 인덱스", in = ParameterIn.PATH)
+            @PathVariable Long postId) {
         try {
             IncreaseShareResponse increaseShareResponse = countService.increaseShareResponse(postId);
             return ResponseEntity.ok().body(increaseShareResponse);

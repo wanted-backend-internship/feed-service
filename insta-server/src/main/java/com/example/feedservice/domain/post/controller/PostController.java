@@ -9,6 +9,8 @@ import com.example.feedservice.global.exception.ApiException;
 import com.example.feedservice.global.exception.ApiExceptionResponse;
 import com.example.feedservice.global.util.PageUtil;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -117,14 +119,16 @@ public class PostController {
     @Operation(summary = "게시글 상세 반환")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "게시글 상세 반환 성공",
-                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class))),
+                    content = @Content(schema = @Schema(implementation = PostResponse.class))),
             @ApiResponse(responseCode = "401", description = "권한 오류",
                     content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class))),
             @ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없는 경우",
                     content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class)))
     })
     @GetMapping(value = "/{postId}")
-    public ResponseEntity<?> getPostDetail(@PathVariable Long postId) {
+    public ResponseEntity<?> getPostDetail(
+            @Parameter(name = "id", description = "post 인덱스", in = ParameterIn.PATH)
+            @PathVariable Long postId) {
         try {
             PostResponse postResponse = postService.getPostDetail(postId);
             return ResponseEntity.ok().body(postResponse);
