@@ -31,7 +31,7 @@ public class HashTagService {
         HashTag hashTag = null;
         if (userId.equals(post.getUser().getId())) {
             hashTag = HashTag.builder()
-                    .hashTag(hashTagCreateRequest.getHashTag())
+                    .hashTag(hashTagCreateRequest.getHashTag().substring(0))
                     .post(post)
                     .build();
             hashTagRepository.save(hashTag);
