@@ -36,7 +36,7 @@ public class HashTagService {
         }
 
         HashTagCreateResponse hashTagCreateResponse = HashTagCreateResponse.builder()
-                .hashTagId(hashTag.getId())
+                .hashTagId(String.valueOf(hashTag.getId()))
                 .postId(post.getId())
                 .hashTags(post.getHashTags()).build();
 
@@ -45,7 +45,7 @@ public class HashTagService {
 
     @Transactional
     public void deleteHashTag(HashTagDeleteRequest hashTagDeleteRequest, HttpServletRequest httpServletRequest) {
-        HashTag hashTag = hashTagRepository.findById(hashTagDeleteRequest.getHashTagId())
+        HashTag hashTag = hashTagRepository.findById(Long.parseLong(hashTagDeleteRequest.getHashTagId()))
                 .orElseThrow(() -> new ApiException(ErrorType.HASH_TAG_NOT_FOUND));
 
         Long loginUserId = authUtil.getLoginUserIndex();

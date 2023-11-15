@@ -38,11 +38,17 @@ public class PostService {
         Page<Post> posts = postRepository.findByUserIdOrderByIdDesc(userId, pageable);
         List<PostResponse> postResponses = new ArrayList<>();
         for (Post post : posts) {
+            List<String[]> hashTags = new ArrayList<>();
+            List<HashTag> temps = post.getHashTags();
+            for (HashTag temp : temps) {
+                hashTags.add(new String[]{String.valueOf(temp.getId()), temp.getHashTag()});
+            }
+
             PostResponse postResponse = PostResponse.builder()
                     .id(post.getId())
                     .title(post.getTitle())
                     .description(post.getDescription())
-                    .hashTags(post.getHashTags())
+                    .hashTags(hashTags)
                     .heartCount(post.getHeartCount())
                     .shareCount(post.getShareCount())
                     .viewCount(post.getViewCount())
@@ -131,11 +137,17 @@ public class PostService {
         post.increaseViewCount();
         postRepository.save(post);
 
+        List<String[]> hashTags = new ArrayList<>();
+        List<HashTag> temps = post.getHashTags();
+        for (HashTag temp : temps) {
+            hashTags.add(new String[]{String.valueOf(temp.getId()), temp.getHashTag()});
+        }
+
         PostResponse postResponse = PostResponse.builder()
                 .id(post.getId())
                 .title(post.getTitle())
                 .description(post.getDescription())
-                .hashTags(post.getHashTags())
+                .hashTags(hashTags)
                 .heartCount(post.getHeartCount())
                 .shareCount(post.getShareCount())
                 .viewCount(post.getViewCount())

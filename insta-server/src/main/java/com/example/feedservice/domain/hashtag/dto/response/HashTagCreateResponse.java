@@ -18,7 +18,7 @@ public class HashTagCreateResponse {
     private Long postId;
 
     @Schema (description = "해시 태그 인덱스", example = "1")
-    private Long hashTagId;
+    private String hashTagId;
 
     @Schema (description = "해시 태그")
     private List<HashTag> hashTags;
