@@ -39,12 +39,14 @@ public class ResolverController {
     @Operation(summary = "요청 게시글 응답")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "게시글 생성 성공",
-                    content = @Content(schema = @Schema(implementation = PostResponse.class))),
+                    content = @Content(schema = @Schema(implementation = ResolverResponse.class))),
             @ApiResponse(responseCode = "401", description = "권한 오류",
                     content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class)))
     })
     @GetMapping(value = "")
     public ResponseEntity<?> getPostByTypeAndDate(
+            @Parameter(name = "hashTag", description = "date, hour", in = ParameterIn.PATH)
+            @RequestParam String hashTag,
             @Parameter(name = "type", description = "date, hour", in = ParameterIn.PATH)
             @RequestParam String type,
             @Parameter(name = "start", description = "시작 날짜", in = ParameterIn.PATH)
@@ -76,6 +78,7 @@ public class ResolverController {
             }
 
             StatisticRequest statisticRequest = StatisticRequest.builder()
+                    .hashTag(hashTag)
                     .values(value)
                     .types(type)
                     .startDate(start)
