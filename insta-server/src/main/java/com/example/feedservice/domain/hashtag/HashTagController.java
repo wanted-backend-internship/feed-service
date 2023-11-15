@@ -33,7 +33,7 @@ public class HashTagController {
     @Operation(summary = "해시태그 생성")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "해시태그 생성 성공",
-                    content = @Content(schema = @Schema(implementation = PostResponse.class))),
+                    content = @Content(schema = @Schema(implementation = HashTagCreateResponse.class))),
             @ApiResponse(responseCode = "401", description = "권한 오류",
                     content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class))),
             @ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없는 경우",

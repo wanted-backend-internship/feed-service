@@ -9,6 +9,8 @@ import com.example.feedservice.global.exception.ApiException;
 import com.example.feedservice.global.exception.ErrorType;
 import com.example.feedservice.global.util.AuthUtil;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,10 +37,17 @@ public class HashTagService {
             hashTagRepository.save(hashTag);
         }
 
+        List<String[]> hashTags = new ArrayList<>();
+        List<HashTag> temps = post.getHashTags();
+        for (HashTag temp : temps) {
+            hashTags.add(new String[]{String.valueOf(temp.getId()), temp.getHashTag()});
+        }
+
         HashTagCreateResponse hashTagCreateResponse = HashTagCreateResponse.builder()
                 .hashTagId(String.valueOf(hashTag.getId()))
                 .postId(post.getId())
-                .hashTags(post.getHashTags()).build();
+                .hashTags(hashTags)
+                .build();
 
         return hashTagCreateResponse;
     }

@@ -21,5 +21,5 @@ public class HashTagCreateResponse {
     private String hashTagId;
 
     @Schema (description = "해시 태그")
-    private List<HashTag> hashTags;
+    private List<String[]> hashTags;
 }
