@@ -5,6 +5,7 @@ import com.example.feedservice.domain.post.dto.response.IncreaseShareResponse;
 import com.example.feedservice.domain.post.dto.response.PostResponse;
 import com.example.feedservice.domain.post.service.CountService;
 import com.example.feedservice.global.exception.ApiException;
+import com.example.feedservice.global.exception.ApiExceptionResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,11 +29,11 @@ public class CountController {
     @Operation(summary = "좋아요 수 증가")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "좋아요 수 증가 성공",
-                    content = @Content(schema = @Schema(implementation = ApiException.class))),
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class))),
             @ApiResponse(responseCode = "401", description = "권한 오류",
-                    content = @Content(schema = @Schema(implementation = ApiException.class))),
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class))),
             @ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없는 경우",
-                    content = @Content(schema = @Schema(implementation = ApiException.class)))
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class)))
     })
     @PostMapping(value = "/{postId}/hearts")
     public ResponseEntity<?> increaseHeartResponse(@PathVariable Long postId) {
@@ -49,11 +50,11 @@ public class CountController {
     @Operation(summary = "공유 수 증가")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "공유 수 증가 성공",
-                    content = @Content(schema = @Schema(implementation = ApiException.class))),
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class))),
             @ApiResponse(responseCode = "401", description = "권한 오류",
-                    content = @Content(schema = @Schema(implementation = ApiException.class))),
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class))),
             @ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없는 경우",
-                    content = @Content(schema = @Schema(implementation = ApiException.class)))
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class)))
     })
     @PostMapping(value = "/{postId}/shares")
     public ResponseEntity<?> increaseShareResponse(@PathVariable Long postId) {

@@ -7,6 +7,7 @@ import com.example.feedservice.domain.post.dto.response.PostCreateResponse;
 import com.example.feedservice.domain.post.dto.response.PostResponse;
 import com.example.feedservice.domain.post.service.PostService;
 import com.example.feedservice.global.exception.ApiException;
+import com.example.feedservice.global.exception.ApiExceptionResponse;
 import com.example.feedservice.global.util.PageUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -39,9 +40,9 @@ public class PostController {
             @ApiResponse(responseCode = "200", description = "게시글 리스트 반환 성공",
                     content = @Content(schema = @Schema(implementation = PostResponse.class))),
             @ApiResponse(responseCode = "401", description = "권한 오류",
-                    content = @Content(schema = @Schema(implementation = ApiException.class))),
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class))),
             @ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없는 경우",
-                    content = @Content(schema = @Schema(implementation = ApiException.class)))
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class)))
     })
     @GetMapping(value = "")
     public ResponseEntity<?> getPosts(Pageable pageable, HttpServletRequest request) {
@@ -60,7 +61,7 @@ public class PostController {
             @ApiResponse(responseCode = "200", description = "게시글 생성 성공",
             content = @Content(schema = @Schema(implementation = PostCreateResponse.class))),
             @ApiResponse(responseCode = "401", description = "권한 오류",
-            content = @Content(schema = @Schema(implementation = ApiException.class)))
+            content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class)))
     })
     @PostMapping(value = "")
     public ResponseEntity<?> createPost(@RequestBody PostCreateRequest request) {
@@ -78,9 +79,9 @@ public class PostController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "게시글 수정 성공"),
             @ApiResponse(responseCode = "401", description = "권한 오류",
-                    content = @Content(schema = @Schema(implementation = ApiException.class))),
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class))),
             @ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없는 경우",
-                    content = @Content(schema = @Schema(implementation = ApiException.class)))
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class)))
     })
     @PatchMapping(value = "")
     public ResponseEntity<?> updatePost(@RequestBody PostUpdateRequest postUpdateRequest, HttpServletRequest httpServletRequest) {
@@ -98,9 +99,9 @@ public class PostController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "게시글 삭제 성공"),
             @ApiResponse(responseCode = "401", description = "권한 오류",
-                    content = @Content(schema = @Schema(implementation = ApiException.class))),
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class))),
             @ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없는 경우",
-                    content = @Content(schema = @Schema(implementation = ApiException.class)))
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class)))
     })
     @DeleteMapping(value = "")
     public ResponseEntity<?> deletePost(@RequestBody PostDeleteRequest request, HttpServletRequest httpServletRequest) {
@@ -117,11 +118,11 @@ public class PostController {
     @Operation(summary = "게시글 상세 반환")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "게시글 상세 반환 성공",
-                    content = @Content(schema = @Schema(implementation = ApiException.class))),
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class))),
             @ApiResponse(responseCode = "401", description = "권한 오류",
-                    content = @Content(schema = @Schema(implementation = ApiException.class))),
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class))),
             @ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없는 경우",
-                    content = @Content(schema = @Schema(implementation = ApiException.class)))
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class)))
     })
     @GetMapping(value = "/{postId}")
     public ResponseEntity<?> getPostDetail(@PathVariable Long postId) {

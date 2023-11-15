@@ -5,6 +5,7 @@ import com.example.feedservice.domain.post.resolver.dto.reponse.ResolverResponse
 import com.example.feedservice.domain.post.resolver.dto.request.StatisticRequest;
 import com.example.feedservice.global.api.ThirdPartyTokenUtil;
 import com.example.feedservice.global.exception.ApiException;
+import com.example.feedservice.global.exception.ApiExceptionResponse;
 import com.example.feedservice.global.log.HttpRequestLog;
 import com.example.feedservice.global.log.HttpRequestLogRepository;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,7 +39,7 @@ public class ResolverController {
             @ApiResponse(responseCode = "200", description = "게시글 생성 성공",
                     content = @Content(schema = @Schema(implementation = PostCreateResponse.class))),
             @ApiResponse(responseCode = "401", description = "권한 오류",
-                    content = @Content(schema = @Schema(implementation = ApiException.class)))
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class)))
     })
     @GetMapping(value = "")
     public ResponseEntity<?> getPostByTypeAndDate(

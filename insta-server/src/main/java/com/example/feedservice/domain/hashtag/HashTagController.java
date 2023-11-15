@@ -7,6 +7,7 @@ import com.example.feedservice.domain.post.dto.request.PostCreateRequest;
 import com.example.feedservice.domain.post.dto.response.PostCreateResponse;
 import com.example.feedservice.domain.post.dto.response.PostResponse;
 import com.example.feedservice.global.exception.ApiException;
+import com.example.feedservice.global.exception.ApiExceptionResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -36,9 +37,9 @@ public class HashTagController {
             @ApiResponse(responseCode = "200", description = "해시태그 생성 성공",
                     content = @Content(schema = @Schema(implementation = PostResponse.class))),
             @ApiResponse(responseCode = "401", description = "권한 오류",
-                    content = @Content(schema = @Schema(implementation = ApiException.class))),
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class))),
             @ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없는 경우",
-                    content = @Content(schema = @Schema(implementation = ApiException.class)))
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class)))
     })
     @PostMapping(value = "")
     public ResponseEntity<?> createPost(@RequestBody HashTagCreateRequest hashTagCreateRequest, HttpServletRequest httpServletRequest) {
@@ -57,9 +58,9 @@ public class HashTagController {
             @ApiResponse(responseCode = "200", description = "해시태그 삭제 성공",
                     content = @Content(schema = @Schema(implementation = PostResponse.class))),
             @ApiResponse(responseCode = "401", description = "권한 오류",
-                    content = @Content(schema = @Schema(implementation = ApiException.class))),
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class))),
             @ApiResponse(responseCode = "404", description = "해시태그를 찾을 수 없는 경우",
-                    content = @Content(schema = @Schema(implementation = ApiException.class)))
+                    content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class)))
     })
     @DeleteMapping(value = "")
     public ResponseEntity<?> createPost(@RequestBody HashTagDeleteRequest hashTagDeleteRequest, HttpServletRequest httpServletRequest) {
