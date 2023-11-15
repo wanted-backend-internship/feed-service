@@ -3,8 +3,6 @@ package com.example.feedservice.domain.hashtag;
 import com.example.feedservice.domain.hashtag.dto.request.HashTagCreateRequest;
 import com.example.feedservice.domain.hashtag.dto.request.HashTagDeleteRequest;
 import com.example.feedservice.domain.hashtag.dto.response.HashTagCreateResponse;
-import com.example.feedservice.domain.post.dto.request.PostCreateRequest;
-import com.example.feedservice.domain.post.dto.response.PostCreateResponse;
 import com.example.feedservice.domain.post.dto.response.PostResponse;
 import com.example.feedservice.global.exception.ApiException;
 import com.example.feedservice.global.exception.ApiExceptionResponse;

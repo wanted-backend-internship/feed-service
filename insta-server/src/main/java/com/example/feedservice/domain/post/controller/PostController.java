@@ -3,7 +3,6 @@ package com.example.feedservice.domain.post.controller;
 import com.example.feedservice.domain.post.dto.request.PostCreateRequest;
 import com.example.feedservice.domain.post.dto.request.PostDeleteRequest;
 import com.example.feedservice.domain.post.dto.request.PostUpdateRequest;
-import com.example.feedservice.domain.post.dto.response.PostCreateResponse;
 import com.example.feedservice.domain.post.dto.response.PostResponse;
 import com.example.feedservice.domain.post.service.PostService;
 import com.example.feedservice.global.exception.ApiException;
@@ -59,15 +58,15 @@ public class PostController {
     @Operation(summary = "게시글 생성")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "게시글 생성 성공",
-            content = @Content(schema = @Schema(implementation = PostCreateResponse.class))),
+            content = @Content(schema = @Schema(implementation = PostResponse.class))),
             @ApiResponse(responseCode = "401", description = "권한 오류",
             content = @Content(schema = @Schema(implementation = ApiExceptionResponse.class)))
     })
     @PostMapping(value = "")
     public ResponseEntity<?> createPost(@RequestBody PostCreateRequest request) {
         try {
-            PostCreateResponse postCreateResponse = postService.createPost(request);
-            return ResponseEntity.ok().body(postCreateResponse);
+            PostResponse postResponse = postService.createPost(request);
+            return ResponseEntity.ok().body(postResponse);
 
         } catch (ApiException apiException) {
             return ResponseEntity.status(apiException.getErrorType().getStatus())

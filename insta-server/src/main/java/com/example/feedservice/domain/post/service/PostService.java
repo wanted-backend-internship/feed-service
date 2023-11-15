@@ -8,7 +8,6 @@ import com.example.feedservice.domain.post.domain.PostEditor;
 import com.example.feedservice.domain.post.dto.request.PostCreateRequest;
 import com.example.feedservice.domain.post.dto.request.PostDeleteRequest;
 import com.example.feedservice.domain.post.dto.request.PostUpdateRequest;
-import com.example.feedservice.domain.post.dto.response.PostCreateResponse;
 import com.example.feedservice.domain.post.dto.response.PostResponse;
 import com.example.feedservice.domain.user.User;
 import com.example.feedservice.global.exception.ApiException;
@@ -60,7 +59,7 @@ public class PostService {
     }
 
     @Transactional
-    public PostCreateResponse createPost(PostCreateRequest postCreateRequest) {
+    public PostResponse createPost(PostCreateRequest postCreateRequest) {
         Optional<User> user = authUtil.getLoginUser();
 
         Post createPost = Post.builder()
@@ -70,6 +69,7 @@ public class PostService {
                 .viewCount(0L)
                 .heartCount(0L)
                 .user(user.get())
+                .createdAt(LocalDateTime.now())
                 .build();
 
         postRepository.save(createPost);
@@ -88,18 +88,24 @@ public class PostService {
             }
         }
 
-        PostCreateResponse postCreateResponse = PostCreateResponse.builder()
+        List<String[]> hashTags = new ArrayList<>();
+        List<HashTag> temps = createPost.getHashTags();
+        for (HashTag temp : temps) {
+            hashTags.add(new String[]{String.valueOf(temp.getId()), temp.getHashTag()});
+        }
+
+        PostResponse postResponse = PostResponse.builder()
                 .id(createPost.getId())
                 .title(createPost.getTitle())
                 .description(createPost.getDescription())
-                .hashTags(createPost.getHashTags())
+                .hashTags(hashTags)
                 .heartCount(createPost.getHeartCount())
                 .shareCount(createPost.getShareCount())
                 .viewCount(createPost.getViewCount())
-                .createdAt(LocalDateTime.now())
+                .createdAt(createPost.getCreatedAt())
                 .build();
 
-        return postCreateResponse;
+        return postResponse;
     }
 
     @Transactional
