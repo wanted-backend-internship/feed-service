@@ -70,6 +70,7 @@ public class SecurityConfiguration {
         config.setAllowCredentials(true);
         config.addAllowedOriginPattern("*");
         config.addExposedHeader("Authorization");
+        config.addExposedHeader("Instagram");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);

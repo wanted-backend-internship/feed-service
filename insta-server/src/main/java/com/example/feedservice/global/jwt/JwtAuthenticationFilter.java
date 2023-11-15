@@ -24,11 +24,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String requestURI = request.getRequestURI();
 
         if (requestURI.startsWith("/api/auth") ||
+                requestURI.equals("/api/resolve/") ||
                 requestURI.equals("/api/token/refresh") ||
                 requestURI.startsWith("/swagger-ui") ||
                 requestURI.startsWith("/v3") ||
-                requestURI.startsWith("/favicon.ico") ||
-                requestURI.startsWith("/api/feed")
+                requestURI.startsWith("/favicon.ico")
         ) {
             filterChain.doFilter(request, response);
             return;
