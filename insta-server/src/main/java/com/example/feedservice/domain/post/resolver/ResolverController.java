@@ -9,6 +9,8 @@ import com.example.feedservice.global.exception.ApiExceptionResponse;
 import com.example.feedservice.global.log.HttpRequestLog;
 import com.example.feedservice.global.log.HttpRequestLogRepository;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -43,9 +45,13 @@ public class ResolverController {
     })
     @GetMapping(value = "")
     public ResponseEntity<?> getPostByTypeAndDate(
+            @Parameter(name = "type", description = "date, hour", in = ParameterIn.PATH)
             @RequestParam String type,
+            @Parameter(name = "start", description = "시작 날짜", in = ParameterIn.PATH)
             @RequestParam LocalDateTime start,
+            @Parameter(name = "end", description = "끝 날짜", in = ParameterIn.PATH)
             @RequestParam LocalDateTime end,
+            @Parameter(name = "value", description = "count, view_count, heart_count, share_count", in = ParameterIn.PATH)
             @RequestParam String value,
             HttpServletRequest httpServletRequest) {
 
