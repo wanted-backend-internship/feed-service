@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "Resolve", description = "외부 게시글 요청 응답 API")
+@Tag(name = "Resolver", description = "외부 게시글 요청 응답 API")
 @RestController
 @RequestMapping(value = "/api/resolve/posts")
 @RequiredArgsConstructor
