@@ -63,7 +63,7 @@ public class JwtController {
 
         // 어세스 토큰 재발급
         String newAccessToken;
-        newAccessToken = "Bearer" + tokenUtil.refreshAccessToken(refreshToken);
+        newAccessToken = "Bearer " + tokenUtil.refreshAccessToken(refreshToken);
 
         // 헤더에 추가
         HttpHeaders responseHeaders = new HttpHeaders();

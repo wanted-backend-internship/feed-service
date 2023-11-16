@@ -22,7 +22,6 @@ public class RedisUtil {
 
     // 키:값 저장 시 만료기한 설정
     public void setDataExpire(String key, String value, Duration duration) {
-
         ValueOperations<String, String> valueOperations = stringRedisTemplate.opsForValue();
         valueOperations.set(key, value, duration);
     }
