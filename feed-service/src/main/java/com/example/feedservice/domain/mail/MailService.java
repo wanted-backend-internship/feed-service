@@ -14,15 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MailService {
     private final JavaMailSender mailSender;
-    private RedisUtil redisUtil;
-
-    public String checkIsAuthCode(String email) {
-        String redisValue = redisUtil.getData("authCode:" + email);
-        if (redisValue != null) {
-            return redisValue;
-        }
-        return null;
-    }
+    private final RedisUtil redisUtil;
 
     public String getRandomNumber() {
         Random random = new Random();
@@ -44,17 +36,5 @@ public class MailService {
         message.setSubject(subject);
         message.setText(text);
         mailSender.send(message);
-    }
-
-    public boolean authenticateRandomNumber(String randomNumber, String email) {
-        String redisValue = redisUtil.getData("authCode:" + email);
-
-        if (redisValue == null) {
-            throw  new NoSuchElementException("authentication code expired for mail : " + email);
-        }
-        if (redisValue.equals(randomNumber)) {
-            return false;
-        }
-        return true;
     }
 }

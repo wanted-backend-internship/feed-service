@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class MailController {
     private final MailService mailService;
-    private RedisUtil redisUtil;
+    private final RedisUtil redisUtil;
 
     @Operation(summary = "메일로 인증번호 보내기")
     @ApiResponses(value = {
@@ -34,15 +34,8 @@ public class MailController {
         String email = mailDTO.getEmail();
         String randomNumber;
 
-        if (mailService.checkIsAuthCode(email) == null) {
-            randomNumber = mailService.getRandomNumber();
-            redisUtil.setDataExpireWithPrefix("authCode", email, randomNumber, Duration.ofMinutes(30));
-            mailService.validateSetAuthCode(email);
-
-        } else {
-            randomNumber = mailService.checkIsAuthCode(email);
-        }
-
+        randomNumber = mailService.getRandomNumber();
+        redisUtil.setDataExpireWithPrefix("authCode", email, randomNumber, Duration.ofMinutes(30));
         mailService.sendSimpleMessage(email, "이메일 인증 번호 발송", "6 자리 숫자: " + randomNumber);
     }
 }
