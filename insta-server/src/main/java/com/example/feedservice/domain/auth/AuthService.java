@@ -68,7 +68,7 @@ public class AuthService {
                 .orElseThrow(() -> new ApiException(ErrorType.USER_NOT_FOUND));
 
         String accessToken = tokenUtil.generateAccessToken(String.valueOf(user.getId()));
-        httpServletResponse.setHeader("Authorization", "Bearer" + accessToken);
+        httpServletResponse.setHeader("Authorization", "Bearer " + accessToken);
 
         if (redisUtil.getData(String.valueOf(user.getId())) == null) {
             String refreshToken = tokenUtil.generateRefreshToken(String.valueOf(user.getId()));
