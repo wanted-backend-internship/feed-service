@@ -20,7 +20,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         ErrorType errorType = null;
         String requestURI = request.getRequestURI();
 
-        if (authException instanceof InsufficientAuthenticationException) { // 인가에 실패한 경우
+        if (authException instanceof InsufficientAuthenticationException) { // 인증에 실패한 경우
             setResponse(response, ErrorType.ACCESS_TOKEN_EXPIRED);
         }
     }

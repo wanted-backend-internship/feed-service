@@ -41,9 +41,9 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeRequests()
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/auth/**", "/api/token/**").permitAll()
                 .requestMatchers("/swagger-ui/**", "/v3/**", "/favicon.ico").permitAll()
-                .requestMatchers("/api/feed/**").permitAll()
+                .requestMatchers("/api/resolve/**").permitAll()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .anyRequest().authenticated()
                 .and().exceptionHandling().authenticationEntryPoint(customAuthenticationEntryPoint);
@@ -71,6 +71,7 @@ public class SecurityConfiguration {
         config.addAllowedOriginPattern("*");
         config.addExposedHeader("Authorization");
         config.addExposedHeader("Instagram");
+        config.addExposedHeader("Location");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
