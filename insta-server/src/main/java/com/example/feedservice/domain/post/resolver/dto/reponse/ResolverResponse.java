@@ -13,10 +13,4 @@ import lombok.NoArgsConstructor;
 public class ResolverResponse {
     private Date dateOnly;
     private Long dynamicValue;
-//    private String date;
-//    private String hour;
-//    private Long countOfPost;
-//    private Long countOfHeart;
-//    private Long countOfView;
-//    private Long countOfShare;
 }
