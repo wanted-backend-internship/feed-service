@@ -4,14 +4,16 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class StatisticRequest {
-    private final String hashTag;
-    private final String types;
-    private final String values;
-    private final LocalDateTime startDate;
-    private final LocalDateTime endDate;
+    private String hashTag;
+    private String types;
+    private String values;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 }

@@ -1,13 +1,12 @@
 package com.example.feedservice.domain.post.resolver;
 
-import com.example.feedservice.domain.post.dto.response.PostResponse;
 import com.example.feedservice.domain.post.resolver.dto.reponse.ResolverResponse;
 import com.example.feedservice.domain.post.resolver.dto.request.StatisticRequest;
 import com.example.feedservice.global.api.ThirdPartyTokenUtil;
-import com.example.feedservice.global.exception.ApiException;
 import com.example.feedservice.global.exception.ApiExceptionResponse;
 import com.example.feedservice.global.log.HttpRequestLog;
 import com.example.feedservice.global.log.HttpRequestLogRepository;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -17,10 +16,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,17 +45,17 @@ public class ResolverController {
     })
     @GetMapping(value = "")
     public ResponseEntity<?> getPostByTypeAndDate(
-            @Parameter(name = "hashTag", description = "date, hour", in = ParameterIn.PATH)
+            @Parameter(name = "hashTag", description = "유저 닉네임", in = ParameterIn.QUERY)
             @RequestParam String hashTag,
-            @Parameter(name = "type", description = "date, hour", in = ParameterIn.PATH)
+            @Parameter(name = "type", description = "date, hour", in = ParameterIn.QUERY)
             @RequestParam String type,
-            @Parameter(name = "start", description = "시작 날짜", in = ParameterIn.PATH)
+            @Parameter(name = "start", description = "시작 날짜", in = ParameterIn.QUERY)
             @RequestParam LocalDateTime start,
             @Parameter(name = "end", description = "끝 날짜", in = ParameterIn.PATH)
             @RequestParam LocalDateTime end,
             @Parameter(name = "value", description = "count, view_count, heart_count, share_count", in = ParameterIn.PATH)
             @RequestParam String value,
-            HttpServletRequest httpServletRequest) {
+            HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
 
         HttpRequestLog httpRequestLog = HttpRequestLog.builder()
                 .host(httpServletRequest.getRemoteHost())
@@ -68,14 +68,7 @@ public class ResolverController {
 
         try {
             String accessToken = thirdPartyTokenUtil.getJWTTokenFromHeader(httpServletRequest);
-
-            if (!thirdPartyTokenUtil.isValidToken(accessToken)) {
-                // 인증 실패: 클라이언트를 인증 URL로 리디렉트
-                String redirectUrl = "http://localhost:8080/api/auth/third";
-                return ResponseEntity.status(HttpStatus.FOUND)
-                        .header("Location", redirectUrl)
-                        .build();
-            }
+            thirdPartyTokenUtil.isValidToken(accessToken);
 
             StatisticRequest statisticRequest = StatisticRequest.builder()
                     .hashTag(hashTag)
@@ -91,14 +84,16 @@ public class ResolverController {
                 return ResponseEntity.ok().body(DateResponses);
 
             } else if (type.equals("hour")) {
-                List<Object[]> hourlyResponses = resolverRepository.findPostsByTypeHourAndValue(statisticRequest);
+                List<Object[]> hourlyResponses = resolverRepository.findPostsByDateAndHour(statisticRequest);
                 return ResponseEntity.ok().body(hourlyResponses);
             }
             return ResponseEntity.ok().body("조건에 맞는 게시글이 존재하지 않습니다.");
 
-        } catch (ApiException apiException) {
-            return ResponseEntity.status(apiException.getErrorType().getStatus())
-                    .body(apiException.getErrorType().getMessage());
+        } catch (ExpiredJwtException jwtException) {
+            return ResponseEntity.ok().body("http://localhost:8082/api/auth/third");
+
+        } catch(IllegalArgumentException illegalArgumentException) {
+            return ResponseEntity.internalServerError().body("잘못된 요청 입니다.");
         }
     }
 }
