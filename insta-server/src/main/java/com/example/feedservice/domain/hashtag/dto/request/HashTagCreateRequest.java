@@ -16,5 +16,5 @@ public class HashTagCreateRequest {
     private Long postId;
 
     @Schema (description = "해시 태그", example = "가방")
-    private String HashTag;
+    private String hashTag;
 }

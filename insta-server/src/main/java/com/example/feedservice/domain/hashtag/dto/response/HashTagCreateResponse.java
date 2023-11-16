@@ -1,6 +1,5 @@
 package com.example.feedservice.domain.hashtag.dto.response;
 
-import com.example.feedservice.domain.hashtag.HashTag;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.AllArgsConstructor;

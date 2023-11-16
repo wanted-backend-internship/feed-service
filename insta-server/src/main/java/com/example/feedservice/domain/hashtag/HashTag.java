@@ -29,7 +29,7 @@ public class HashTag {
 
     private String hashTag;
 
-    private void mappingPost(Post post) {
+    public void mappingPost(Post post) {
         this.post = post;
         post.mappingHashTag(this);
     }
