@@ -4,10 +4,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Schema (description = "게시글 생성 Request")
 public class PostCreateRequest {
     @Schema (description = "게시글 제목", example = "오늘 신상")
