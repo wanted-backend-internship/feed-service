@@ -60,7 +60,8 @@ public class PostService {
 
     @Transactional
     public PostResponse createPost(PostCreateRequest postCreateRequest) {
-        Optional<User> user = authUtil.getLoginUser();
+        User user = authUtil.getLoginUser()
+                .orElseThrow(() -> new ApiException(ErrorType.USER_NOT_FOUND));
 
         Post createPost = Post.builder()
                 .title(postCreateRequest.getTitle())
@@ -68,7 +69,8 @@ public class PostService {
                 .shareCount(0L)
                 .viewCount(0L)
                 .heartCount(0L)
-                .user(user.get())
+                .hashTags(new ArrayList<>())
+                .user(user)
                 .createdAt(LocalDateTime.now())
                 .build();
 
@@ -81,16 +83,14 @@ public class PostService {
 
                 HashTag hashTag = HashTag.builder()
                         .hashTag(word)
-                        .post(createPost)
                         .build();
-
+                hashTag.mappingPost(createPost);
                 hashTagRepository.save(hashTag);
             }
         }
 
         List<String[]> hashTags = new ArrayList<>();
-        List<HashTag> temps = createPost.getHashTags();
-        for (HashTag temp : temps) {
+        for (HashTag temp : createPost.getHashTags()) {
             hashTags.add(new String[]{String.valueOf(temp.getId()), temp.getHashTag()});
         }
 
@@ -107,6 +107,7 @@ public class PostService {
 
         return postResponse;
     }
+
 
     @Transactional
     public void updatePost (PostUpdateRequest postUpdateRequest, HttpServletRequest httpServletRequest) {

@@ -37,7 +37,7 @@ public class CountService {
         postRepository.save(post);
 
         IncreaseHeartResponse increaseHeartResponse = IncreaseHeartResponse.builder()
-                .heartCount(post.getShareCount())
+                .heartCount(post.getHeartCount())
                 .build();
 
         return increaseHeartResponse;
