@@ -40,18 +40,13 @@ public class ThirdPartyTokenUtil {
 
     // 토큰의 유효성 검사
     public boolean isValidToken(String token) {
-        try {
-            Jws<Claims> claims = Jwts.parser()
-                    .setSigningKey(SECRET_KEY)
-                    .parseClaimsJws(token);
+        Jws<Claims> claims = Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token);
 
-            return claims.getBody()
-                    .getExpiration()
-                    .after(new Date());
-
-        } catch (ExpiredJwtException e) { // 어세스 토큰 만료
-            throw new ApiException(ErrorType.ACCESS_TOKEN_EXPIRED);
-        }
+        return claims.getBody()
+                .getExpiration()
+                .after(new Date());
     }
 
     // 어세스 토큰을 헤더에서 추출하는 메서드
