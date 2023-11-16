@@ -12,18 +12,18 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class AuthUtil {
-    private final UserRepository userRepository;
     private final TokenUtil tokenUtil;
 
     public Long getLoginUserIndex() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = authentication.getPrincipal();
-        Long userId = ((User) principal).getId();
+        Optional<User> user = getLoginUser();
+        Long userId = user.get().getId();
         return userId;
     }
 
     public Optional<User> getLoginUser() {
-        return userRepository.findById(getLoginUserIndex());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+        return (Optional<User>) principal;
     }
 
     public Long  getLoginUserIdFromToken(HttpServletRequest request) {
