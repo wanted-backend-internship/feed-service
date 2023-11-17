@@ -1,3 +1,6 @@
+<br>
+<br>
+
 <div align="center">
   <img src="https://github.com/wanted-backend-internship/feed-service/assets/119668620/39d1e679-0388-442d-994f-88d0c45c593f" width=600/>
 </div>
@@ -35,7 +38,7 @@
 
 ### QueryDSL 이용하기
 이전부터 써보고 싶었지만 적당한 이유를 찾지못해 미뤄 뒀지만, 이번에는 사용하기에 좋을 것 같아 사용해보기로 결정 하였습니다. <br>
-이용하게 된 이유와, 개발하면서 발생한 트러블, 그리고 이를 해결하는 과정을 [QueryDSL 로 알맞은 데이터 뽑아내기](https://www.notion.so/QueryDSL-50fe41426de945de89bf027f3d7a2f9b?pvs=21) 에 담아두었습니다.
+이용하게 된 이유와, 개발하면서 발생한 트러블, 그리고 해결 과정을 [QueryDSL 로 알맞은 데이터 뽑아내기](https://www.notion.so/QueryDSL-50fe41426de945de89bf027f3d7a2f9b?pvs=21) 에 담아두었습니다.
 
 <br>
 
