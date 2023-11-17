@@ -53,12 +53,12 @@
 <br>
 
 ## 링크
-### 🔗 피드 서비스 포스트맨 api 문서
-https://documenter.getpostman.com/view/26140052/2s9YXo2fQY
+### 피드 서비스 포스트맨 api 문서
+🔗 https://documenter.getpostman.com/view/26140052/2s9YXo2fQY
 ### sns 서비스 포스트맨 api 문서
-https://documenter.getpostman.com/view/26140052/2s9YXo2fQV
+🔗 https://documenter.getpostman.com/view/26140052/2s9YXo2fQV
 ### 프로젝트 노션 링크
-https://sieun96.notion.site/Feed-262f912764a148e7a025723ebe040ef4?pvs=4
+🔗 https://sieun96.notion.site/Feed-262f912764a148e7a025723ebe040ef4?pvs=4
 - 각종 다이어그램을 확인할 수 있어요.
 - 프로젝트를 진행하면서 한 고찰을 확인할 수 있어요.
 - 프로젝트를 마치며 회고한 내용을 볼 수 있어요.
